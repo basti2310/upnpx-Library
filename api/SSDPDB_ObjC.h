@@ -70,6 +70,7 @@
 -(int)removeObserver:(SSDPDB_ObjC_Observer*)obs;
 -(void)SSDPDBUpdate;
 -(void)setUserAgentProduct:(NSString*)product andOS:(NSString*)os;
+-(void)setTarget:(NSString*)target;
 
 @property(readonly, retain) NSMutableArray *SSDPObjCDevices;
 

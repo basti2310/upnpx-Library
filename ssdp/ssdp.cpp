@@ -41,7 +41,7 @@
 
 
 
-SSDP::SSDP():mMulticastSocket(INVALID_SOCKET), mUnicastSocket(INVALID_SOCKET), mReadLoop(0), mTTL(2), mOS("mac/1.0"), mProduct("upnpx/1.0"){
+SSDP::SSDP():mMulticastSocket(INVALID_SOCKET), mUnicastSocket(INVALID_SOCKET), mReadLoop(0), mTTL(2), mOS("mac/1.0"), mProduct("upnpx/1.0"), mTarget("ssdp:all") {
 	mDB = new SSDPDB();
 	mDB->Start();
 	mParser = new SSDPParser(mDB);
@@ -215,7 +215,7 @@ int SSDP::Stop(){
 //Multicast M-Search
 int SSDP::Search(){
 	u32 seconds = 3;
-	char target[]="ssdp:all";
+	const char *target=mTarget.c_str();
 	const char *os=mOS.c_str();
 	const char *product=mProduct.c_str();
 	
@@ -268,9 +268,15 @@ void SSDP::SetProduct(const char* product){
         mProduct = product;
 }
 
+void SSDP::SetTarget(const char* target){
+    if(target)
+        mTarget = target;
+}
+
 
 std::string mOS;
-std::string mProcuct;
+std::string mProduct;
+std::string mTarget;
 
 
 

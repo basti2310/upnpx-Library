@@ -63,7 +63,8 @@ public:
 	int Advertise();
 	int Search();
     void SetOS(const char* os);
-    void SetProduct(const char* product);    
+    void SetProduct(const char* product);
+    void SetTarget(const char* target);
 	SSDPDB* GetDB();
 private:
 	SOCKET mMulticastSocket;
@@ -80,6 +81,7 @@ private:
 	fd_set mReadFDS;
 	fd_set mWriteFDS;
 	u16 mTTL;
+    std::string mTarget;
     std::string mOS;
     std::string mProduct;
 	SSDPParser* mParser;
