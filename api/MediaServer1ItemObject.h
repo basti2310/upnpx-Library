@@ -73,7 +73,7 @@
 @property(retain, nonatomic) NSString *icon;
 @property(retain, nonatomic) NSString *bitrate;
 @property(readwrite) int durationInSeconds;
-@property(retain, nonatomic) NSDictionary *uriCollection;
+@property(copy, nonatomic) NSDictionary *uriCollection;
 @property(readonly) NSMutableArray *resources;
 
 
