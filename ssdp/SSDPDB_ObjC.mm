@@ -154,20 +154,12 @@ private:
     }
 }
 
--(void)setTarget:(NSString*)target{
-    if(target != nil){
-        const char *c_target = [target cStringUsingEncoding:NSASCIIStringEncoding];
-        UPNP::GetInstance()->GetSSDP()->SetTarget(c_target);
-    }
-}
-
-
 -(void)SSDPDBUpdate{
 	[NSRunLoop currentRunLoop]; //Start our runloop
 	
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
-	id<SSDPDB_ObjC_Observer> obs;
+	SSDPDB_ObjC_Observer *obs;
 	
 	//Inform the listeners
 	NSEnumerator *listeners = [mObservers objectEnumerator];
