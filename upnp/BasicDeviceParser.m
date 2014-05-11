@@ -247,8 +247,10 @@
 
 -(void)embeddedDevice:(NSString*)startStop{
 	if([startStop isEqualToString:@"ElementStart"]){
-		[friendlyNameStack addObject:friendlyName];
-		[udnStack addObject:udn];		
+        if(friendlyName){
+            [friendlyNameStack addObject:friendlyName];
+        }
+        [udnStack addObject:udn];
 	}else{
 		//Was this the device we are looking for ?
 		if(udn){//@todo check this
@@ -259,6 +261,7 @@
 			}
 		}
         [self setUdn:[udnStack lastObject]];
+        // NOTE: friendlyName might be nil.
         [self setFriendlyName:[friendlyNameStack lastObject]];
         
         [friendlyNameStack removeLastObject];
