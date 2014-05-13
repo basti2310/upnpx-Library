@@ -80,6 +80,8 @@
         
         stateVariables = [[NSMutableDictionary alloc] init]; //StateVariable
         
+        self.actionList = [NSMutableArray new];
+        
         mObservers = [[NSMutableArray alloc] init];
         
         //We still need to initialze this class with information from the location URL given by the ssdp 'device'

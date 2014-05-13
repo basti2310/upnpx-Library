@@ -51,7 +51,6 @@
 	StateVariableList *mStatevarListCache;
 	StateVariableRange *mStatevarRangeCache;
 	StateVariable *mStatevarCache;
-
 }
 
 -(id)initWithUPnPService:(BasicUPnPService*)upnpservice;

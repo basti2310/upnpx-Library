@@ -83,7 +83,7 @@
 //The return value must be 0 when implenented
 -(int)process; //in C++ this should be a pure virtual function
 
-
+@property (nonatomic, retain) NSMutableArray *actionList;
 
 @property (readwrite, retain) NSURL* baseURL;
 @property (readwrite, retain) NSString* baseURLString;

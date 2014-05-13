@@ -59,7 +59,7 @@
         mStatevarListCache = [[StateVariableList alloc] init];
         
         mCollectingStateVar = NO;
-	}
+    }
     
 	return self;
 }
@@ -130,7 +130,9 @@
 
 	[self addAsset:[NSArray arrayWithObjects: @"scpd", @"serviceStateTable", @"stateVariable", @"allowedValueList", nil] callfunction:@selector(allowedValueList:) functionObject:self setStringValueFunction:nil setStringValueObject:nil];
 	[self addAsset:[NSArray arrayWithObjects: @"scpd", @"serviceStateTable", @"stateVariable", @"allowedValueList", @"allowedValue", nil] callfunction:nil functionObject:self setStringValueFunction:@selector(setAllowedValue:) setStringValueObject:self];
-
+    
+    // parse the action list
+    [self addAsset:[NSArray arrayWithObjects: @"scpd", @"actionList", @"action", @"name", nil] callfunction:nil functionObject:self setStringValueFunction:@selector(setAction:) setStringValueObject:self];
 		
 	NSURL *serviceDescUrl = [NSURL URLWithString:[service descriptionURL] relativeToURL:[service baseURL] ];	
 	ret = [super parseFromURL:serviceDescUrl];
@@ -140,8 +142,10 @@
 	return ret;
 }
 
-
-
+- (void)setAction: (NSString *)value
+{
+    [service.actionList addObject:value];
+}
 
 -(void)serviceTag:(NSString*)startStop{
 	if([startStop isEqualToString:@"ElementStop"]){
