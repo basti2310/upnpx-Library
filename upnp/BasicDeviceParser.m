@@ -253,7 +253,9 @@
 -(void)embeddedDevice:(NSString*)startStop{
 	if([startStop isEqualToString:@"ElementStart"]){
         if(friendlyName){
-            [friendlyNameStack addObject:friendlyName];
+            if(friendlyName){
+                [friendlyNameStack addObject:friendlyName];
+            }
         }
         [udnStack addObject:udn];
 	}else{
