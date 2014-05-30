@@ -174,18 +174,12 @@
 	
 	if([discardedItems count] > 0){
 		//Inform the listeners so they know the rootDevices array might change
-		UPnPDBObserver *obs;
-		NSEnumerator *listeners = [mObservers objectEnumerator];
-		while((obs = [listeners nextObject])){
-			[obs UPnPDBWillUpdate:self];
-		}		
-		
 		[rootDevices removeObjectsInArray:discardedItems];
-				
-		listeners = [mObservers objectEnumerator];
-		while((obs = [listeners nextObject])){
-			[obs UPnPDBUpdated:self];
-		}		
+        for (BasicUPnPDevice *device in discardedItems) {
+            for (id<UPnPDBObserver> observer in mObservers) {
+                [observer UPnPDDeviceRemoved:self device:device];
+            }
+        }
 	}
 	[discardedItems release];
 	[self unlock];
@@ -291,22 +285,14 @@
 					//NSLog(@"httpThread upnpdevice, location=%@", [upnpdevice xmlLocation]);
 					
 					//Inform the listeners so they know the rootDevices array might change
-					UPnPDBObserver *obs;
-					NSEnumerator *listeners = [mObservers objectEnumerator];
-					while((obs = [listeners nextObject])){
-						[obs UPnPDBWillUpdate:self];
-					}	
-					
+
 					//This is the only place we add devices to the rootdevices
 					[rootDevices addObject:upnpdevice];
 
-							
-					listeners = [mObservers objectEnumerator];
-					while((obs = [listeners nextObject])){
-						[obs UPnPDBUpdated:self];
-					}		
-					
-					
+                    for (id<UPnPDBObserver> observer in mObservers) {
+                        [observer UPnPDDeviceAdded:self device:upnpdevice];
+                    }
+
 					[self unlock];
 				}
 				[readyForDescription removeObjectAtIndex:0];

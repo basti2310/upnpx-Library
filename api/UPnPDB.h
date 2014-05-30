@@ -44,8 +44,8 @@
  * Observers
  */
 @protocol UPnPDBObserver
--(void)UPnPDBWillUpdate:(UPnPDB*)sender;
--(void)UPnPDBUpdated:(UPnPDB*)sender;
+-(void)UPnPDDeviceAdded:(UPnPDB*)sender device:(BasicUPnPDevice *) device;
+-(void)UPnPDDeviceRemoved:(UPnPDB*)sender device:(BasicUPnPDevice *) device;
 @end
 
 
