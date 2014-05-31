@@ -99,6 +99,10 @@
         uriCollection = [[OrderedDictionary alloc] init];
         resources = [[NSMutableArray alloc] init];
         
+        self.creators = [NSMutableArray new];
+        self.authors = [NSMutableArray new];
+        self.directors = [NSMutableArray new];
+        
         /* TODO: mediaObjects -> retain property */
         mediaObjects = mediaObjectsArray;
         [mediaObjects retain];
@@ -123,6 +127,14 @@
         [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"genre", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setGenre:) setStringValueObject:self];
         [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"originalTrackNumber", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setOriginalTrackNumber:) setStringValueObject:self];
         [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"albumArtURI", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setAlbumArt:) setStringValueObject:self];
+        
+        [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"creator", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setCreator:) setStringValueObject:self];
+        [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"author", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setAuthor:) setStringValueObject:self];
+        [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"director", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setDirector:) setStringValueObject:self];
+        [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"longDescription", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setLongDescription:) setStringValueObject:self];
+        [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"lastPlaybackPosition", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setLastPlaybackPosition:) setStringValueObject:self];
+        [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"lastPlaybackTime", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setLastPlaybacktime:) setStringValueObject:self];
+        [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"playbackCount", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setPlaybackCount:) setStringValueObject:self];
 
         [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"res",  nil] callfunction:@selector(res:) functionObject:self setStringValueFunction:@selector(setUri:) setStringValueObject:self];
     }
@@ -174,6 +186,13 @@
 	[self setAlbumArt:nil];
 	[self setDuration:nil];
     
+    [self setLongDescription:@""];
+    [self setLastPlaybackPosition:@""];
+    [self setLastPlaybacktime:@""];
+    [self setPlaybackCount:@""];
+    [self.creators removeAllObjects];
+    [self.authors removeAllObjects];
+    [self.directors removeAllObjects];
     
     [resources removeAllObjects];
     [uriCollection removeAllObjects];
@@ -243,6 +262,14 @@
 		[media setIcon:icon]; //REMOVE THIS ?
 		[media setAlbumArt:albumArt];
         [media setUriCollection:uriCollection];
+        
+        [media setLongDescription:self.longDescription];
+        [media setLastPlaybackPosition:self.lastPlaybackPosition];
+        [media setLastPlaybacktime:self.lastPlaybacktime];
+        [media setPlaybackCount:self.playbackCount];
+        [media setCreators:self.creators];
+        [media setAuthors:self.authors];
+        [media setDirectors:self.directors];
                 
         MediaServer1ItemRes *resource = nil;		
         NSEnumerator *e = [resources objectEnumerator];
@@ -295,6 +322,19 @@
     [uri retain];
 }
 
+- (void)setCreator: (NSString *)value
+{
+    [self.creators addObject:value];
+}
 
+- (void)setAuthor: (NSString *)value
+{
+    [self.authors addObject:value];
+}
+
+- (void)setDirector: (NSString *)value
+{
+    [self.directors addObject:value];
+}
 
 @end
