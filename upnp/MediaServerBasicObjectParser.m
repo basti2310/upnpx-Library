@@ -102,7 +102,7 @@
         self.creators = [NSMutableArray new];
         self.authors = [NSMutableArray new];
         self.directors = [NSMutableArray new];
-        
+                
         /* TODO: mediaObjects -> retain property */
         mediaObjects = mediaObjectsArray;
         [mediaObjects retain];
@@ -114,6 +114,7 @@
             [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"container", @"title", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setMediaTitle:) setStringValueObject:self];
             [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"container", @"class", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setMediaClass:) setStringValueObject:self];
             [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"container", @"albumArtURI", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setAlbumArt:) setStringValueObject:self];
+            [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"container", @"res",  nil] callfunction:nil functionObject:self setStringValueFunction:@selector(setContainerUri:) setStringValueObject:self];
         }
         
         
@@ -141,9 +142,6 @@
     
 	return self;
 }
-
-
-
 
 
 -(void)dealloc{
@@ -220,6 +218,8 @@
 		[media setObjectClass:mediaClass];
 		[media setChildCount:childCount];
 		[media setAlbumArt:albumArt];
+        
+        [media setUri:self.containerUri];
 		
 		[mediaObjects addObject:media];
 
@@ -311,8 +311,13 @@
         [resources addObject:r];      
         [r release];
         
-	}else{
-        [uriCollection setObject:uri forKey:protocolInfo]; //@todo: we overwrite uri's with same protocol info
+	}
+    else
+    {
+        if (uri != nil)
+        {
+            [uriCollection setObject:uri forKey:protocolInfo]; //@todo: we overwrite uri's with same protocol info
+        }
 	}
 }
 
