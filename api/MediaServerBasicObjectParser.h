@@ -108,6 +108,6 @@
 @property (readwrite, retain) NSString *lastPlaybacktime;
 @property (readwrite, retain) NSString *playbackCount;
 
-@property (nonatomic, retain) NSString *containerUri;
+@property (nonatomic, retain) NSMutableArray *containerUris;
 
 @end

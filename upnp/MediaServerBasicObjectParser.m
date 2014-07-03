@@ -102,6 +102,8 @@
         self.creators = [NSMutableArray new];
         self.authors = [NSMutableArray new];
         self.directors = [NSMutableArray new];
+        
+        self.containerUris = [NSMutableArray new];
                 
         /* TODO: mediaObjects -> retain property */
         mediaObjects = mediaObjectsArray;
@@ -192,6 +194,8 @@
     [self.authors removeAllObjects];
     [self.directors removeAllObjects];
     
+    [self.containerUris removeAllObjects];
+    
     [resources removeAllObjects];
     [uriCollection removeAllObjects];
 }
@@ -219,7 +223,7 @@
 		[media setChildCount:childCount];
 		[media setAlbumArt:albumArt];
         
-        [media setUri:self.containerUri];
+        media.uris = [self.containerUris copy];
 		
 		[mediaObjects addObject:media];
 
@@ -340,6 +344,11 @@
 - (void)setDirector: (NSString *)value
 {
     [self.directors addObject:value];
+}
+
+- (void)setContainerUri: (NSString *)value
+{
+    [self.containerUris addObject:value];
 }
 
 @end

@@ -42,6 +42,6 @@
 -(void)dealloc;
 
 @property(retain, nonatomic) NSString *childCount;
-@property (nonatomic, strong) NSString *uri;
+@property (nonatomic, strong) NSArray *uris;
 
 @end
