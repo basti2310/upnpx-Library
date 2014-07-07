@@ -72,7 +72,7 @@
 	
 	//SOAP Message to Send
 	NSMutableString *body = [[NSMutableString alloc] init];
-	[body appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>"];
+	//[body appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>"];
 	[body appendString:@"<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">"];
 	[body appendString:@"<s:Body>"];
 	[body appendFormat:@"<u:%@ xmlns:u=\"%@\">", soapAction, upnpNameSpace];
@@ -82,6 +82,10 @@
 	[body appendFormat:@"</u:%@>", soapAction];
 	[body appendFormat:@"</s:Body></s:Envelope>"];
 	len = [body length];
+    
+    
+    //NSLog(@"// body: %@ \n\n", body);
+    
 
 	//Construct the HTML POST 
 	NSMutableURLRequest* urlRequest=[NSMutableURLRequest requestWithURL:actionURL
@@ -99,10 +103,9 @@
 	
 	//POST (Synchronous)
 	[urlRequest setHTTPMethod:@"POST"];	
-	[urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]]; 
-	
-	
-	
+	[urlRequest setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+
+    
 	NSHTTPURLResponse *urlResponse;
 	NSData *resp = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&urlResponse error:nil];
 	

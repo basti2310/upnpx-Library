@@ -110,4 +110,6 @@
 
 @property (nonatomic, retain) NSMutableArray *containerUris;
 
+@property (readwrite, retain) NSString *resMD;
+
 @end

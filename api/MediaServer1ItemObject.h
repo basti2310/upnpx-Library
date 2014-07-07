@@ -84,4 +84,6 @@
 @property (readwrite, retain) NSString *lastPlaybacktime;
 @property (readwrite, retain) NSString *playbackCount;
 
+@property (readwrite, retain) NSString *resMD;
+
 @end

@@ -140,6 +140,8 @@
         [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"playbackCount", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setPlaybackCount:) setStringValueObject:self];
 
         [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"res",  nil] callfunction:@selector(res:) functionObject:self setStringValueFunction:@selector(setUri:) setStringValueObject:self];
+        
+        [self addAsset:[NSArray arrayWithObjects: @"DIDL-Lite", @"item", @"resMD", nil] callfunction:nil functionObject:nil setStringValueFunction:@selector(setResMD:) setStringValueObject:self];
     }
     
 	return self;
@@ -193,6 +195,8 @@
     [self.creators removeAllObjects];
     [self.authors removeAllObjects];
     [self.directors removeAllObjects];
+    
+    self.resMD = @"";
     
     [self.containerUris removeAllObjects];
     
@@ -274,6 +278,8 @@
         [media setCreators:self.creators];
         [media setAuthors:self.authors];
         [media setDirectors:self.directors];
+        
+        [media setResMD:self.resMD];
                 
         MediaServer1ItemRes *resource = nil;		
         NSEnumerator *e = [resources objectEnumerator];

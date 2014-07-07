@@ -106,7 +106,6 @@
 }
 
 
-
 //hh:mm:ss -> seconds
 -(int)HMS2Seconds{
 	int s = 0;
