@@ -339,6 +339,40 @@
     return ret;
 }
 
-
+// only for sonos
+/*
+ <u:AddURIToQueue xmlns:u="urn:schemas-upnp-org:service:AVTransport:1">
+    <InstanceID>
+        0
+    </InstanceID>
+    <EnqueuedURI>
+        x-file-cifs://MACBOOK-8016EA/iTunes/iTunes%20Media/Music/Duck%20Sauce/Unknown%20Album/10A%20Big%20Bad%20Wolf%20(Original%20Mix).mp3
+    </EnqueuedURI>
+    <EnqueuedURIMetaData>
+        <DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:r="urn:schemas-rinconnetworks-com:metadata-1-0/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><item id="S://MACBOOK-8016EA/iTunes/iTunes%20Media/Music/Duck%20Sauce/Unknown%20Album/10A%20Big%20Bad%20Wolf%20(Original%20Mix).mp3" parentID="A:TRACKS" restricted="true"><dc:title>10A Big Bad Wolf (Original Mix)</dc:title><upnp:class>object.item.audioItem.musicTrack</upnp:class><desc id="cdudn" nameSpace="urn:schemas-rinconnetworks-com:metadata-1-0/">RINCON_AssociatedZPUDN</desc></item></DIDL-Lite>
+    </EnqueuedURIMetaData>
+    <DesiredFirstTrackNumberEnqueued>
+        0
+    </DesiredFirstTrackNumberEnqueued>
+    <EnqueueAsNext>
+        1
+    </EnqueueAsNext>
+ </u:AddURIToQueue>
+ */
+- (int)AddURIToQueueWithInstanceID: (NSString*)instanceID URI: (NSString *)uri MetaData: (NSString *)metaData DesiredFirstTrackNumberEnqueued: (NSString *)firstTrack EnqueueAsNext: (NSString *)nextTrack
+{
+    int ret = 0;
+    
+    NSDictionary *parameters = nil;
+    NSDictionary *output = nil;
+    NSArray *parameterKeys = nil;
+    NSArray *parameterObjects = nil;
+    parameterKeys = [NSArray arrayWithObjects:@"InstanceID", @"EnqueuedURI", @"EnqueuedURIMetaData", @"DesiredFirstTrackNumberEnqueued", @"EnqueueAsNext", nil];
+    parameterObjects = [NSArray arrayWithObjects:instanceID, uri, metaData, firstTrack, nextTrack, nil];
+    parameters = [OrderedDictionary dictionaryWithObjects:parameterObjects forKeys:parameterKeys];
+    
+    ret = [self action:@"AddURIToQueue" parameters:parameters returnValues:output];
+    return ret;
+}
 
 @end

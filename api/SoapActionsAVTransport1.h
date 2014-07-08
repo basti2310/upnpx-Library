@@ -58,4 +58,7 @@
 -(int)SetRecordQualityModeWithInstanceID:(NSString*)instanceid NewRecordQualityMode:(NSString*)newrecordqualitymode;
 -(int)GetCurrentTransportActionsWithInstanceID:(NSString*)instanceid OutActions:(NSMutableString*)actions;
 
+// only for sonos
+- (int)AddURIToQueueWithInstanceID: (NSString*)instanceID URI: (NSString *)uri MetaData: (NSString *)metaData DesiredFirstTrackNumberEnqueued: (NSString *)firstTrack EnqueueAsNext: (NSString *)nextTrack;
+
 @end
