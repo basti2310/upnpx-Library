@@ -54,7 +54,7 @@
         playList = [[MediaPlaylist alloc] init];
         
             
-        //Try to load the playist (?)
+        
 	}
     
 	return self;

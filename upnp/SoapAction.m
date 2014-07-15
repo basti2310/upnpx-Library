@@ -72,10 +72,12 @@
 	
 	//SOAP Message to Send
 	NSMutableString *body = [[NSMutableString alloc] init];
-	//[body appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>"];
+	[body appendString:@"<?xml version=\"1.0\" encoding=\"utf-8\"?>"];
 	[body appendString:@"<s:Envelope s:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">"];
-	[body appendString:@"<s:Body>"];
-	[body appendFormat:@"<u:%@ xmlns:u=\"%@\">", soapAction, upnpNameSpace];
+    [body appendString:@"<s:Body>"];
+    [body appendFormat:@"<u:%@ xmlns:u=\"%@\">", soapAction, upnpNameSpace];
+    
+    
 	for (id key in parameters) {		
 		[body appendFormat:@"<%@>%@</%@>", key, [parameters objectForKey:key], key];
 	}
@@ -85,9 +87,9 @@
     
     
     //NSLog(@"// body: %@ \n\n", body);
-    
 
-	//Construct the HTML POST 
+    
+	//Construct the HTML POST
 	NSMutableURLRequest* urlRequest=[NSMutableURLRequest requestWithURL:actionURL
 															cachePolicy:NSURLRequestReloadIgnoringCacheData
 														timeoutInterval:15.0];
